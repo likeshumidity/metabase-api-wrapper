@@ -1,0 +1,23 @@
+{
+  "name": "metabase-api-wrapper",
+  "version": "0.0.1",
+  "description": "OpenAPI 3 Spec generator for Metabase API and OpenAPI Generator clients",
+  "main": "src/index.js",
+  "repository": "git@github.com:likeshumidity/metabase-api-wrapper.git",
+  "author": "Jacob Joseph <jacob@dayflower.io>",
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "commander": "^12.0.0"
+  },
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^7.0.2",
+    "@typescript-eslint/parser": "^7.0.2",
+    "eslint": "^8.0.1",
+    "eslint-config-standard": "^17.1.0",
+    "eslint-plugin-import": "^2.25.2",
+    "eslint-plugin-n": "^15.0.0 || ^16.0.0 ",
+    "eslint-plugin-promise": "^6.0.0",
+    "standard": "^17.1.0"
+  }
+}
