@@ -11,7 +11,7 @@ $ ./utils/generate-openapi-spec generate --help
 ```
 
 ## TODO
-- [ ] document Metabase API using OpenAPI 3
+- [ ] document Metabase API using [OpenAPI 3](https://swagger.io/specification/)
     - [ ] scrape [Metabase repo](https://github.com/metabase/metabase) docs for API spec
         - [ ] Try [marked](https://github.com/markedjs/marked) for parsing Markdown
         - [ ] `/docs/api/`
