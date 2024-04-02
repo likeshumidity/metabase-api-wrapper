@@ -12,14 +12,15 @@ $ ./utils/generate-openapi-spec generate --help
 
 ## TODO
 - [ ] document Metabase API using [OpenAPI 3](https://swagger.io/specification/)
+    - [x] OpenAPI 3 spec for API added to product (will be in version 50) `/api/docs/`
+    ~~- [ ] scrape [Metabase repo](https://github.com/metabase/metabase) clojure code for API spec (maybe use clojurescript?)
+        - [ ] Try [clojarse-js](https://github.com/mattfenwick/clojarse-js/tree/master) for Clojure to AST
+        - [ ] `/src/metabase/api/`
+        - [ ] `/enterprise/backend/src/metabase_enterprise/api/`~~
     - [ ] scrape [Metabase repo](https://github.com/metabase/metabase) docs for API spec
         - [ ] Try [marked](https://github.com/markedjs/marked) for parsing Markdown
         - [ ] `/docs/api/`
         - [ ] `/docs/api/ee/`
-    - [ ] scrape [Metabase repo](https://github.com/metabase/metabase) clojure code for API spec (maybe use clojurescript?)
-        - [ ] Try [clojarse-js](https://github.com/mattfenwick/clojarse-js/tree/master) for Clojure to AST
-        - [ ] `/src/metabase/api/`
-        - [ ] `/enterprise/backend/src/metabase_enterprise/api/`
     - [ ] add additional docs to enrich what is included in docs and code
     - [ ] ?improve docs based on enriched docs
 - [ ] generate OpenAPI spec from documneted Metabase API from scraping and enriched docs

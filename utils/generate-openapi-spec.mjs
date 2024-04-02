@@ -3,6 +3,7 @@
 import axios from 'axios'
 
 import { readFileSync } from 'fs'
+import { readdir } from 'fs/promises'
 
 import { Command } from 'commander'
 
@@ -13,12 +14,21 @@ const loadJson = filePath => {
 
 const packageJSON = loadJson('package.json')
 
-const RepoScraperDocs = async ({ tag, branch }) => {
-  console.log(tag)
-  console.log(branch)
+const getMatchingUrlPaths = async (url) => {
+  const data = await axios.get(url)
 
+  return (data.data.tree).filter(item => {
+    if (item.path.startsWith('docs/api')) {
+      return true
+    }
+
+    return false
+  })
+}
+
+const RepoScraperDocs = async ({ repo, tag, branch }) => {
   const createUrl = (tag, branch) => {
-    const urlBase = 'https://api.github.com/repos/metabase/metabase/git/trees/'
+    const urlBase = `https://api.github.com/repos/${repo}/git/trees/`
     if (tag !== null) {
       return `${urlBase}${tag}?recursive=1`
     }
@@ -28,18 +38,17 @@ const RepoScraperDocs = async ({ tag, branch }) => {
 
   const url = createUrl(tag, branch)
 
-  const data = await axios.get(url)
+  console.log(`Scraping URL: ${url}`)
 
-  const matchingPaths = (data.data.tree).filter(item => {
-    if (item.path.startsWith('docs/api')) {
-      return true
-    }
-
-    return false
-  })
+  const matchingPaths = await getMatchingUrlPaths(url)
 
   console.log(matchingPaths)
 
+  const dataDir = process.env.API_WRAPPER_DATA_DIR || 'data'
+
+  const dataDirContents = await readdir(dataDir, { recursive: true })
+
+  console.log(dataDirContents)
   // 1. collect relevant paths
   // 2. retrieve files on relevant paths
   // 3. parse and interpret files
@@ -64,6 +73,7 @@ cli
 
 cli.command('scrape-repo')
   .description('Scrape metabase/metabase repo')
+  .option('-r, --repo <repo>', 'repo to scrape', 'metabase/metabase')
   .option('-t, --tag <tag>', 'tag to scrape', null)
   .option('-b, --branch <branch>', 'branch to scrape', 'master')
   .action((options) => {
